@@ -51,8 +51,6 @@ jobs: # FUCK MY LIFE BROOOOO
             
             - name: Fix Lime
               run: |
-                haxelib run lime rebuild hxcpp windows -clean
-                haxelib run lime rebuild lime windows -clean
                 haxelib run lime rebuild cpp -clean
             
             - name: Compile build
