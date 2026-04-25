@@ -1,0 +1,78 @@
+# FUCK MY LIFE BROOOOOOOOO.
+name: LinuxBinaries
+
+on: # Workflow triggers on both when a commit is pushed, or when a pull request is made.
+    push:
+        branches: 
+            - dev
+    pull_request:
+        branches:
+            - dev
+    
+    workflow_dispatch: # Run workflow manually from the actions tab.
+    workflow_call: #For release builds
+        inputs:
+            buildFlags:
+                required: false
+                type: string
+
+jobs:
+    #
+    Linux:
+        runs-on: ubuntu-22.04
+
+        steps:
+            - name: Fetch latest commit
+              uses: actions/checkout@v6.0.2
+              with:
+                submodules: true
+                
+            - name: Setup Haxe
+              uses: krdlab/setup-haxe@master
+              with:
+                haxe-version: 4.3.7
+            
+            - name: Get cache
+              uses: actions/cache@v5
+              with:
+                key: linux-cache
+                path: |
+                  .haxelib/
+                  export/release/linux/haxe/
+                  export/release/linux/obj/
+            
+            - name: Install LibVLC
+              run: |
+                sudo apt-get install vlc libvlc-dev libvlccore-dev vlc-bin
+
+            - name: Install libs
+              run: |
+                haxelib setup ~/haxelib
+                haxelib install hxcpp > /dev/null --quiet
+                haxelib install hxpkg --quiet
+                haxelib run hxpkg install
+            
+            - name: Compile build
+              run: haxelib run lime build Project.xml linux -D ${{inputs.buildFlags}}
+
+            - name: Publish artifact
+              uses: actions/upload-artifact@v7.0.0
+              with:
+                name: NightmareVision (Linux)
+                path: 'export/release/linux/bin'
+
+            - name: Clear cache
+              run: |
+                echo "Clearing linux cache..."
+                set +e
+                gh cache delete linux-cache --confirm
+                echo "Linux cache cleared!"
+
+            - name: Save new cache
+              uses: actions/cache@v5
+              with:
+                  key: linux-cache
+                  path: |
+                    .haxelib/
+                    export/release/linux/haxe/
+                    export/release/linux/obj/
