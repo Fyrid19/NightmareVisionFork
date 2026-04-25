@@ -52,10 +52,10 @@ jobs:
                 haxelib install hxpkg --quiet
                 haxelib run hxpkg install
             
-            # - name: Fix Lime
-            #   run: |
-            #     sudo apt install libwayland-dev libwayland-bin wayland-protocols libxkbcommon-dev
-            #     haxelib run lime rebuild cpp -clean
+            - name: Fix Lime
+              run: |
+                sudo apt install libwayland-dev libwayland-bin wayland-protocols libxkbcommon-dev
+                haxelib run lime rebuild cpp -clean
             
             - name: Compile build
               run: haxelib run lime build Project.xml linux -D ${{inputs.buildFlags}}
