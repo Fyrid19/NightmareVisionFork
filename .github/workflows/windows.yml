@@ -49,9 +49,9 @@ jobs: # FUCK MY LIFE BROOOOO
                 haxelib install hxpkg --quiet
                 haxelib run hxpkg install
             
-            - name: Fix Lime
-              run: |
-                haxelib run lime rebuild cpp -clean
+            # - name: Fix Lime
+            #   run: |
+            #     haxelib run lime rebuild cpp -clean
             
             - name: Compile build
               run: haxelib run lime build windows -D ${{inputs.buildFlags}}
