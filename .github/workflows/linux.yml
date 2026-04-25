@@ -45,7 +45,7 @@ jobs:
               run: |
                 sudo apt-get install vlc libvlc-dev libvlccore-dev vlc-bin
 
-            - name: Install libs
+            - name: Install/Update libs
               run: |
                 haxelib setup ~/haxelib
                 haxelib install hxcpp > /dev/null --quiet
