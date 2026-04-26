@@ -75,6 +75,9 @@ jobs:
                 set +e
                 gh cache delete linux-cache
                 echo "Linux cache cleared!"
+              env:
+                GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                GH_REPO: ${{ github.repository }}
 
             - name: Save new cache
               uses: actions/cache@v5
