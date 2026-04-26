@@ -43,12 +43,18 @@ jobs:
               run: |
                 sudo apt-get install vlc libvlc-dev libvlccore-dev vlc-bin
 
+
             - name: Install/Update libs
               run: |
                 haxelib setup ~/haxelib
                 haxelib install hxcpp > /dev/null --quiet
                 haxelib install hxpkg --quiet
                 haxelib run hxpkg install
+            
+            - name: Install Wayland dependencies
+              run: |
+                sudo apt update
+                sudo apt install libwayland-dev libwayland-bin wayland-protocols libxkbcommon-dev
             
             - name: Fix Lime
               run: |
@@ -63,7 +69,7 @@ jobs:
                 name: NightmareVision (Linux)
                 path: 'export/release/linux/bin'
 
-            - name: Clear cache
+            - name: Clear cache 
               run: |
                 echo "Clearing linux cache..."
                 set +e
