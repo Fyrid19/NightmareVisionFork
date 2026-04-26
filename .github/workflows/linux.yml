@@ -28,7 +28,7 @@ jobs:
                 submodules: true
                 
             - name: Setup Haxe
-              uses: krdlab/setup-haxe@master
+              uses: krdlab/setup-haxe@v2.0.2
               with:
                 haxe-version: 4.3.7
             
@@ -54,7 +54,6 @@ jobs:
             
             - name: Fix Lime
               run: |
-                sudo apt install libwayland-dev libwayland-bin wayland-protocols libxkbcommon-dev
                 haxelib run lime rebuild cpp -clean
             
             - name: Compile build

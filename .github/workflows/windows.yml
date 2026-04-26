@@ -29,7 +29,7 @@ jobs: # FUCK MY LIFE BROOOOO
                 submodules: true
             
             - name: Setup Haxe
-              uses: krdlab/setup-haxe@master
+              uses: krdlab/setup-haxe@v2.0.2
               with: 
                 haxe-version: 4.3.7
             
