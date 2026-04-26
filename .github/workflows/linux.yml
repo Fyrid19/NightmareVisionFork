@@ -67,7 +67,7 @@ jobs:
               run: |
                 echo "Clearing linux cache..."
                 set +e
-                gh cache delete linux-cache --confirm
+                gh cache delete linux-cache
                 echo "Linux cache cleared!"
 
             - name: Save new cache
