@@ -33,7 +33,7 @@ jobs:
                 haxe-version: 4.3.7
             
             - name: Get cache
-              uses: actions/cache@v5
+              uses: actions/cache@v4
               with:
                 key: windows-cache
                 path: |
@@ -70,9 +70,10 @@ jobs:
               env:
                 GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                 GH_REPO: ${{ github.repository }}
+                BRANCH: dev
 
             - name: Save new cache
-              uses: actions/cache@v5
+              uses: actions/cache@v4
               with:
                   key: windows-cache
                   path: |

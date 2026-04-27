@@ -31,7 +31,7 @@ jobs:
                 haxe-version: 4.3.7
             
             - name: Get cache
-              uses: actions/cache@v5
+              uses: actions/cache@v4
               with:
                 key: linux-cache
                 path: |
@@ -51,14 +51,14 @@ jobs:
                 haxelib install hxpkg --quiet
                 haxelib run hxpkg install
             
-            - name: Install Wayland dependencies
-              run: |
-                sudo apt update
-                sudo apt install libwayland-dev libwayland-bin wayland-protocols libxkbcommon-dev
+            # - name: Install Wayland dependencies
+            #   run: |
+            #     sudo apt update
+            #     sudo apt install libwayland-dev libwayland-bin wayland-protocols libxkbcommon-dev
             
-            - name: Fix Lime
-              run: |
-                haxelib run lime rebuild cpp
+            # - name: Fix Lime
+            #   run: |
+            #     haxelib run lime rebuild cpp
             
             - name: Compile build
               run: haxelib run lime build Project.xml linux -D ${{inputs.buildFlags}}
@@ -78,9 +78,10 @@ jobs:
               env:
                 GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                 GH_REPO: ${{ github.repository }}
+                BRANCH: dev
 
             - name: Save new cache
-              uses: actions/cache@v5
+              uses: actions/cache@v4
               with:
                   key: linux-cache
                   path: |
