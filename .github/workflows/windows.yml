@@ -45,7 +45,7 @@ jobs:
               run: |
                 haxelib setup C:/haxelib
                 haxelib install hxcpp > nul --quiet
-                haxelib install hxpkg --quiet
+                haxelib git hxpkg https://github.com/ADA-Funni/hxpkg add-hmm-compatibility --quiet
                 haxelib run hxpkg install
             
             - name: Fix Lime

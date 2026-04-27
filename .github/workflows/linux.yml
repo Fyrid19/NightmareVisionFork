@@ -48,7 +48,7 @@ jobs:
               run: |
                 haxelib setup ~/haxelib
                 haxelib install hxcpp > /dev/null --quiet
-                haxelib install hxpkg --quiet
+                haxelib git hxpkg https://github.com/ADA-Funni/hxpkg add-hmm-compatibility --quiet
                 haxelib run hxpkg install
             
             # - name: Install Wayland dependencies
