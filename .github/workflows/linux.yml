@@ -49,7 +49,19 @@ jobs:
                 haxelib setup ~/haxelib
                 haxelib install hxcpp > /dev/null --quiet
                 haxelib git hxpkg https://github.com/ADA-Funni/hxpkg add-hmm-compatibility --quiet
-                haxelib run hxpkg install
+                haxelib run hxpkg to-hmm
+                
+                cargo install --git https://github.com/ninjamuffin99/hmm-rs hmm-rs
+                hmm-rs clean
+                hmm-rs install
+
+                haxelib fixrepo
+
+                haxelib install hmm
+                haxelib remove grig.audio
+                haxelib run hmm reinstall grig.audio
+
+                haxelib fixrepo
             
             # - name: Install Wayland dependencies
             #   run: |
