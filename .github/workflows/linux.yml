@@ -43,36 +43,22 @@ jobs:
               run: |
                 sudo apt-get install vlc libvlc-dev libvlccore-dev vlc-bin
 
-            - name: Install Rust 
-              run: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
             - name: Install/Update libs
               run: |
                 haxelib setup ~/haxelib
                 haxelib install hxcpp > /dev/null --quiet
                 haxelib git hxpkg https://github.com/ADA-Funni/hxpkg add-hmm-compatibility --quiet
-                haxelib run hxpkg to-hmm
-                
-                cargo install --git https://github.com/ninjamuffin99/hmm-rs hmm-rs
-                hmm-rs clean
-                hmm-rs install
-
-                haxelib fixrepo
-
-                haxelib install hmm
-                haxelib remove grig.audio
-                haxelib run hmm reinstall grig.audio
-
-                haxelib fixrepo
+                haxelib run hxpkg install
             
             # - name: Install Wayland dependencies
             #   run: |
             #     sudo apt update
             #     sudo apt install libwayland-dev libwayland-bin wayland-protocols libxkbcommon-dev
             
-            # - name: Fix Lime
-            #   run: |
-            #     haxelib run lime rebuild cpp
+            - name: Fix Lime
+              run: |
+                haxelib run lime rebuild cpp
             
             - name: Compile build
               run: haxelib run lime build Project.xml linux -D ${{inputs.buildFlags}}

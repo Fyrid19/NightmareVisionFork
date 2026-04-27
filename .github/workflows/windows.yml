@@ -40,28 +40,13 @@ jobs:
                   .haxelib/
                   export/release/windows/haxe/
                   export/release/windows/obj/
-            
-            - name: Install Rust 
-              run: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
             - name: Install/Update libs
               run: |
                 haxelib setup C:/haxelib
                 haxelib install hxcpp > nul --quiet
                 haxelib git hxpkg https://github.com/ADA-Funni/hxpkg add-hmm-compatibility --quiet
-                haxelib run hxpkg to-hmm
-                
-                cargo install --git https://github.com/ninjamuffin99/hmm-rs hmm-rs
-                hmm-rs clean
-                hmm-rs install
-
-                haxelib fixrepo
-
-                haxelib install hmm
-                haxelib remove grig.audio
-                haxelib run hmm reinstall grig.audio
-
-                haxelib fixrepo
+                haxelib run hxpkg install
             
             - name: Fix Lime
               run: |
